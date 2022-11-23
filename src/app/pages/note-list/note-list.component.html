@@ -1,0 +1,35 @@
+<!-- CENTER COLUMN - VISUALIZATION OF FILTER INPUT + ALL NOTES -->
+<div class="main-container">
+
+    <div class="search-bar-container">
+        <!-- TOP INPUT -->
+        <div class="field">
+            <p class="control has-icons-left">
+              <input #filterInput class="input" placeholder="Filter"
+              (keyup)="filter($event.target.value)">
+              <span class="icon is-small is-left">
+                  <!-- ICON FROM FONT AWESOME, IMPORTED IN index.html -->
+                <i class="fas fa-search"></i>
+              </span>
+            </p>
+        </div>
+          <!-- NOTES LIST ITSELF -->
+          <div class="notes-list" [@listAnim]>
+
+            <!-- cardLink ITS A routerLink REFERENCED IN appNoteCard -->
+            <app-note-card 
+            *ngFor="let note of filteredNotes" 
+            [cardLink]="genNoteURL(note)"
+            [@itemAnim]
+            (delete)="receiveDeleteEventFromXButton(note)"
+            [title]="note.title" 
+            [body]="note.body">
+            </app-note-card>
+            
+          </div>
+
+          <button class="button is-primary" routerLink="new">+ Add</button>
+
+    </div>
+
+</div>
